@@ -173,6 +173,10 @@
     padding-left: 10px;
     padding-right: 10px;
     align-self: center;
+    margin-right: 0;
+  }
+  .header__top-nav .header__top-list {
+    margin-right: 0;
   }
   .header__top-item {
     width: 100%;
@@ -189,9 +193,5 @@
   }
   .header__top-item:last-child {
     margin-bottom: 0;
-  }
-  .header__logo {
-    margin-bottom: 50px;
-    font-weight: 600;
   }
 }
