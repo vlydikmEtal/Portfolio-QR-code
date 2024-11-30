@@ -1,3 +1,7 @@
-import animation from "./modules/animatiom";
+import animation from './modules/animatiom'
+import burgerMenu from './modules/burger'
 
-document.addEventListener("DOMContentLoaded", animation);
+document.addEventListener('DOMContentLoaded', () => {
+  burgerMenu()
+  animation()
+})

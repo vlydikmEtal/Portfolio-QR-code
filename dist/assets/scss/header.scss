@@ -16,6 +16,10 @@
         line-height: 21.78px;
       }
     }
+    &-menu {
+      display: flex;
+      align-items: center;
+    }
 
     &-nav {
       margin-left: auto;

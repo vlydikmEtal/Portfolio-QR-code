@@ -11,16 +11,19 @@
     <script src="script.js" defer></script>
     <script
       src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
-    defer
+      defer
     ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
-    defer
+      defer
     ></script>
     <title>Document</title>
   </head>
   <body>
     <div class="wrapper">
+      <span class="burger">
+        <span></span>
+      </span>
       <header class="header">
         <div class="header__top">
           <div class="container">
@@ -29,22 +32,24 @@
                 <img src="assets/img/icons/logo.png" alt="logo" />
                 qardqard
               </a>
-              <nav class="header__top-nav">
-                <ul class="header__top-list">
-                  <li class="header__top-item">
-                    <a href="index.html#about">Как это работает</a>
-                  </li>
-                  <li class="header__top-item">
-                    <a href="index.html#products">Наша продукция</a>
-                  </li>
-                  <li class="header__top-item">
-                    <a href="index.html#faq">FAQ</a>
-                  </li>
-                </ul>
-              </nav>
-              <a href="index.html#download" class="button"
-                >Скачать приложение</a
-              >
+              <div class="header__top-menu">
+                <nav class="header__top-nav">
+                  <ul class="header__top-list">
+                    <li class="header__top-item">
+                      <a href="index.html#about">Как это работает</a>
+                    </li>
+                    <li class="header__top-item">
+                      <a href="index.html#products">Наша продукция</a>
+                    </li>
+                    <li class="header__top-item">
+                      <a href="index.html#faq">FAQ</a>
+                    </li>
+                  </ul>
+                </nav>
+                <a href="index.html#download" class="button"
+                  >Скачать приложение</a
+                >
+              </div>
             </div>
           </div>
         </div>
@@ -99,10 +104,18 @@
                 </div>
                 <div class="header__body-images">
                   <div class="header__body-img">
-                    <img class="header__product-img"  src="assets/img/picture/telephone1.png" alt="main" />
+                    <img
+                      class="header__product-img"
+                      src="assets/img/picture/telephone1.png"
+                      alt="main"
+                    />
                   </div>
                   <div class="header__body-img">
-                    <img class="header__product-img header__product-img--second" src="assets/img/picture/telephone2.png" alt="main" />
+                    <img
+                      class="header__product-img header__product-img--second"
+                      src="assets/img/picture/telephone2.png"
+                      alt="main"
+                    />
                   </div>
                 </div>
               </div>
@@ -114,7 +127,7 @@
                     Ozon
                   </li>
                   <li class="header__product-item">
-                    <img  src="assets/img/icons/wb.png" alt="wb" />
+                    <img src="assets/img/icons/wb.png" alt="wb" />
                     Wildberries
                   </li>
                   <li class="header__product-item">

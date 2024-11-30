@@ -96,8 +96,13 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_animatiom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/animatiom */ "./src/js/modules/animatiom.js");
+/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
 
-document.addEventListener("DOMContentLoaded", _modules_animatiom__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+document.addEventListener('DOMContentLoaded', () => {
+  Object(_modules_burger__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  Object(_modules_animatiom__WEBPACK_IMPORTED_MODULE_0__["default"])();
+});
 
 /***/ }),
 
@@ -129,6 +134,63 @@ const animation = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (animation);
+
+/***/ }),
+
+/***/ "./src/js/modules/burger.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/burger.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const burgerMenu = () => {
+  const burger = document.querySelectorAll('.burger');
+  const header = document.querySelectorAll('.header__top-menu');
+
+  const closeMenu = () => {
+    header.forEach(menu => {
+      if (menu.classList.contains('header__top--open')) {
+        menu.classList.add('header__top--closing');
+        setTimeout(() => {
+          menu.classList.remove('header__top--open', 'header__top--closing');
+        }, 580);
+      }
+    });
+    burger.forEach(item => item.classList.remove('burger__active'));
+  };
+
+  burger.forEach(item => {
+    item.addEventListener('click', e => {
+      e.stopPropagation();
+      const isActive = item.classList.toggle('burger__active');
+      header.forEach(menu => {
+        if (isActive) {
+          menu.classList.add('header__top--open');
+        } else {
+          closeMenu();
+        }
+      });
+    });
+  });
+  header.forEach(item => {
+    item.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', () => {
+    closeMenu();
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 840) {
+      closeMenu();
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (burgerMenu);
 
 /***/ })
 
