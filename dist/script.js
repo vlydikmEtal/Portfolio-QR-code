@@ -156,7 +156,7 @@ const burgerMenu = () => {
         menu.classList.add('header__top--closing');
         setTimeout(() => {
           menu.classList.remove('header__top--open', 'header__top--closing');
-        }, 580);
+        }, 470);
       }
     });
     burger.forEach(item => item.classList.remove('burger__active'));
