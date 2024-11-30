@@ -90,10 +90,45 @@
 /*!************************!*\
   !*** ./src/js/main.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_animatiom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/animatiom */ "./src/js/modules/animatiom.js");
 
+document.addEventListener("DOMContentLoaded", _modules_animatiom__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
+/***/ "./src/js/modules/animatiom.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/animatiom.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const animation = () => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.to('.header__product-img', {
+    rotation: 15,
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power2.inOut'
+  });
+  gsap.to('.header__product-img--second', {
+    rotation: -15,
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power2.inOut'
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (animation);
 
 /***/ })
 
