@@ -5,6 +5,10 @@
   color: #fff;
   position: relative;
 
+  @media (max-width: 770px) {
+    padding-bottom: 80px;
+  }
+
   &-inner {
     h2 {
       font-size: calc(20px + 22 * ((100vw - 320px) / 1250));
