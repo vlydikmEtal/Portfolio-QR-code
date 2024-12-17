@@ -55,6 +55,31 @@ const animation = () => {
 
   const imgItems = document.querySelectorAll('.ready__img-box');
   setupObserver(imgItems, { opacity: 0, x: -100 }, { opacity: 1, x: 0, duration: 1 });
+
+  // Анимация карточек `.section__products-item` при скролле
+  const sectionProductsItems = document.querySelectorAll('.section__products-item');
+
+  sectionProductsItems.forEach((card, index) => {
+    gsap.fromTo(
+      card,
+      {
+        opacity: 0,
+        y: -100, // Начальная позиция сверху
+      },
+      {
+        opacity: 1,
+        y: 0, // Конечная позиция
+        duration: 1,
+        delay: index * 0.2, // Последовательность появления
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom', // Анимация начнётся, когда верх карточки появится внизу экрана
+          toggleActions: 'play none none reverse', // Поведение при скролле
+        },
+      }
+    );
+  });
 };
 
 export default animation;
