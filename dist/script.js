@@ -97,11 +97,14 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_animatiom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/animatiom */ "./src/js/modules/animatiom.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_slide__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slide */ "./src/js/modules/slide.js");
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_animatiom__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_slide__WEBPACK_IMPORTED_MODULE_2__["default"])();
 });
 
 /***/ }),
@@ -115,76 +118,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const animation = () => {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.to('.header__product-img', {
-    rotation: 15,
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: 'power2.inOut'
-  });
-  gsap.to('.header__product-img--second', {
-    rotation: -15,
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: 'power2.inOut'
-  });
-  gsap.to('.section__cards-img', {
-    rotation: 15,
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: 'power2.inOut'
-  });
-  gsap.to('.section__cards-img--second', {
-    rotation: -15,
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: 'power2.inOut'
-  });
-  const items = document.querySelectorAll('.header__product-item');
+  gsap.registerPlugin(ScrollTrigger); // Универсальная функция для бесконечных анимаций
 
-  const animateItem = (item, index) => {
-    let initialY = window.innerWidth <= 644 ? 0 : -100;
-    gsap.fromTo(initialY, {
-      start: 'bottom bottom',
-      markers: true,
-      opacity: 0,
-      y: -100
-    }, {
-      opacity: 1,
-      y: 0,
-      delay: index * 0.15,
-      duration: 1
+  const createInfiniteAnimation = (selector, rotation) => {
+    gsap.to(selector, {
+      rotation,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2.inOut'
     });
-    gsap.fromTo(item, {
-      opacity: 0,
-      y: -100
-    }, {
-      opacity: 1,
-      y: 0,
-      delay: index * 0.15,
-      duration: 1
-    });
-  };
+  }; // Запуск бесконечных анимаций
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        animateItem(entry.target, index);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-  items.forEach(item => {
-    observer.observe(item);
-  });
-  gsap.fromTo('.header__body-info h1', {
+
+  createInfiniteAnimation('.header__product-img', 15);
+  createInfiniteAnimation('.header__product-img--second', -15);
+  createInfiniteAnimation('.section__cards-img', 15);
+  createInfiniteAnimation('.section__cards-img--second', -15);
+  createInfiniteAnimation('.advertising__item-img > img', 0); // Увеличение масштаба
+  // Универсальная функция для анимаций появления
+
+  const animateAppearance = (selector, fromProps, toProps) => {
+    gsap.fromTo(selector, fromProps, toProps);
+  }; // Анимации появления элементов
+
+
+  animateAppearance('.header__body-info h1', {
     opacity: 0,
     x: -100
   }, {
@@ -192,7 +158,7 @@ const animation = () => {
     x: 0,
     duration: 1
   });
-  gsap.fromTo('.header__body-info p', {
+  animateAppearance('.header__body-info p', {
     opacity: 0,
     x: -100
   }, {
@@ -200,7 +166,7 @@ const animation = () => {
     x: 0,
     duration: 1
   });
-  gsap.fromTo('.header__body-btns', {
+  animateAppearance('.header__body-btns', {
     opacity: 0,
     x: 100
   }, {
@@ -208,13 +174,48 @@ const animation = () => {
     x: 0,
     duration: 1
   });
-  gsap.fromTo('.header__body-images', {
+  animateAppearance('.header__body-images', {
     opacity: 0,
-    y: -100,
-    start: 'bottom bottom'
+    y: -100
   }, {
     opacity: 1,
     y: 0,
+    duration: 1
+  }); // Универсальная функция для анимации с IntersectionObserver
+
+  const setupObserver = (items, fromProps, toProps) => {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          gsap.fromTo(entry.target, fromProps, _objectSpread({}, toProps, {
+            delay: index * 0.15
+          }));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    items.forEach(item => observer.observe(item));
+  }; // Применение анимаций через Observer
+
+
+  const productItems = document.querySelectorAll('.header__product-item');
+  setupObserver(productItems, {
+    opacity: 0,
+    y: -100
+  }, {
+    opacity: 1,
+    y: 0,
+    duration: 1
+  });
+  const imgItems = document.querySelectorAll('.ready__img-box');
+  setupObserver(imgItems, {
+    opacity: 0,
+    x: -100
+  }, {
+    opacity: 1,
+    x: 0,
     duration: 1
   });
 };
@@ -233,8 +234,10 @@ const animation = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 const burgerMenu = () => {
-  const burger = document.querySelectorAll('.burger');
-  const header = document.querySelectorAll('.header__top-menu');
+  const burger = document.querySelectorAll('.burger'),
+        header = document.querySelectorAll('.header__top-menu'),
+        listItem = document.querySelectorAll('.header__top-item'),
+        buttons = document.querySelectorAll('.button--close');
 
   const closeMenu = () => {
     header.forEach(menu => {
@@ -242,7 +245,7 @@ const burgerMenu = () => {
         menu.classList.add('header__top--closing');
         setTimeout(() => {
           menu.classList.remove('header__top--open', 'header__top--closing');
-        }, 470);
+        }, 450);
       }
     });
     burger.forEach(item => item.classList.remove('burger__active'));
@@ -261,9 +264,14 @@ const burgerMenu = () => {
       });
     });
   });
-  header.forEach(item => {
-    item.addEventListener('click', e => {
-      e.stopPropagation();
+  listItem.forEach(item => {
+    item.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      closeMenu();
     });
   });
   document.addEventListener('click', () => {
@@ -274,9 +282,51 @@ const burgerMenu = () => {
       closeMenu();
     }
   });
+  header.forEach(menu => {
+    menu.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (burgerMenu);
+
+/***/ }),
+
+/***/ "./src/js/modules/slide.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/slide.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const slide = () => {
+  const collapsibles = document.querySelectorAll('.faq__button');
+  collapsibles.forEach(coll => {
+    coll.addEventListener('click', function () {
+      this.classList.toggle('active');
+      const plusIcon = this.querySelector('.plus');
+
+      if (plusIcon) {
+        plusIcon.classList.toggle('faq__active');
+      }
+
+      const content = this.nextElementSibling;
+
+      if (content) {
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+      }
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (slide);
 
 /***/ })
 

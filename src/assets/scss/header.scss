@@ -39,6 +39,8 @@
         padding-bottom: 1px;
         a {
           font-weight: 500;
+          width: 100%;
+          display: inline-block;
           transition: all 0.3s ease;
         }
         &::before {

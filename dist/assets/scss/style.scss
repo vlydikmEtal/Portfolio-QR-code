@@ -38,6 +38,7 @@
   min-height: 100%;
   font-size: 16px;
   font-family: 'Inter', sans-serif;
+  overflow-y: hidden;
 }
 
 .container {
@@ -73,6 +74,10 @@
 
 @import 'header';
 @import 'product';
+@import 'advertising';
+@import 'faq';
+@import 'ready';
+@import 'footer';
 
 @media (max-width: 840px) {
   .burger {
