@@ -33,6 +33,12 @@
         height: 100%;
         object-fit: cover;
       }
+
+      @media (max-width: 520px) {
+        &:last-child {
+          display: none;
+        }
+      }
     }
   }
   .section__products-list {

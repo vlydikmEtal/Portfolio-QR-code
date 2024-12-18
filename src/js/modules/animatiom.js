@@ -64,13 +64,13 @@ const animation = () => {
       card,
       {
         opacity: 0,
-        y: -100, // Начальная позиция сверху
+        y: -70, // Начальная позиция сверху
       },
       {
         opacity: 1,
         y: 0, // Конечная позиция
-        duration: 1,
-        delay: index * 0.2, // Последовательность появления
+        duration: 1.2,
+        delay: index * 0.3, // Последовательность появления
         ease: 'power2.out',
         scrollTrigger: {
           trigger: card,

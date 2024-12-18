@@ -1,5 +1,9 @@
 .header {
-  padding-bottom: 40px;
+  padding-bottom: 183px;
+
+  @media (max-width: 1000px) {
+    padding-bottom: 90px;
+  }
   &__top {
     &-inner {
       padding: 10px 0;

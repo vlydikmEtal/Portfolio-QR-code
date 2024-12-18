@@ -1,6 +1,10 @@
 .section__faq {
   padding-bottom: 120px;
 
+  @media (max-width: 850px) {
+    padding-bottom: 70px;
+  }
+
   .faq__inner {
     h2 {
       font-size: calc(18px + 16 * ((100vw - 320px) / 1250));
